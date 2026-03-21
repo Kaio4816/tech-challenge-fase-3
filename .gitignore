@@ -1,0 +1,95 @@
+#####################################
+# GO
+#####################################
+# Binaries
+/bin/
+/build/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binaries
+*.test
+
+# Coverage
+*.out
+coverage.out
+
+# Go workspace
+go.work
+go.work.sum
+
+# Dependency directories (se usar vendoring opcional)
+vendor/
+
+#####################################
+# TERRAFORM
+#####################################
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl
+
+#####################################
+# KUBERNETES / SECRETS
+#####################################
+#*secret*.yaml 
+#*secrets*.yaml
+
+#####################################
+# DOCKER
+#####################################
+*.tar
+*.gz
+
+#####################################
+# LOGS
+#####################################
+*.log
+
+#####################################
+# OS
+#####################################
+.DS_Store
+Thumbs.db
+
+#####################################
+# IDE / EDITOR
+#####################################
+.vscode/
+.idea/
+*.swp
+*.swo
+
+#####################################
+# ENV FILES
+#####################################
+.env
+.env.*
+!.env.example
+
+#####################################
+# PYTHON (analytics-service)
+#####################################
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+#####################################
+# NODE (caso use no futuro)
+#####################################
+node_modules/
+
+#####################################
+# MISC
+#####################################
+*.bak
+*.tmp

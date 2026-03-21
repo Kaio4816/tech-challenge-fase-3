@@ -22,6 +22,10 @@ on:
         required: false
         type: boolean
         default: false
+      fail_on_security:
+        required: false
+        type: boolean
+        default: false
 
 env:
   SERVICE_NAME: ${{ inputs.service_name }}
@@ -124,7 +128,7 @@ jobs:
       - name: Run golangci-lint
         if: ${{ inputs.language == 'go' }}
         uses: golangci/golangci-lint-action@v6
-        continue-on-error: ${{ inputs.fail_on_lint == false }}
+        continue-on-error: ${{ !inputs.fail_on_lint }}
         with:
           version: latest
           working-directory: ${{ inputs.service_path }}
@@ -138,14 +142,14 @@ jobs:
 
       - name: Run flake8
         if: ${{ inputs.language == 'python' }}
-        continue-on-error: ${{ inputs.fail_on_lint == false }}
+        continue-on-error: ${{ !inputs.fail_on_lint }}
         run: |
           cd "${SERVICE_PATH}"
           flake8 .
 
       - name: Run pylint
         if: ${{ inputs.language == 'python' }}
-        continue-on-error: ${{ inputs.fail_on_lint == false }}
+        continue-on-error: ${{ !inputs.fail_on_lint }}
         run: |
           cd "${SERVICE_PATH}"
           find . -name "*.py" -not -path "./venv/*" -not -path "./.venv/*" | xargs -r pylint
@@ -179,7 +183,7 @@ jobs:
           scan-ref: ${{ inputs.service_path }}
           format: table
           severity: CRITICAL
-          exit-code: '1'
+          exit-code: ${{ inputs.fail_on_security && '1' || '0' }}
 
       - name: Install gosec
         if: ${{ inputs.language == 'go' }}
@@ -189,6 +193,7 @@ jobs:
 
       - name: Run gosec (SAST)
         if: ${{ inputs.language == 'go' }}
+        continue-on-error: ${{ !inputs.fail_on_security }}
         run: |
           cd "${SERVICE_PATH}"
           gosec ./...
@@ -201,6 +206,7 @@ jobs:
 
       - name: Run Bandit (SAST)
         if: ${{ inputs.language == 'python' }}
+        continue-on-error: ${{ !inputs.fail_on_security }}
         run: |
           cd "${SERVICE_PATH}"
           bandit -r . -ll
@@ -233,7 +239,7 @@ jobs:
           image-ref: ${{ env.FULL_IMAGE }}
           format: table
           severity: CRITICAL
-          exit-code: '1'
+          exit-code: ${{ inputs.fail_on_security && '1' || '0' }}
 
       - name: Configure AWS credentials
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'

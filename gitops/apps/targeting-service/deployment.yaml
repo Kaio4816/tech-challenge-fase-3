@@ -28,7 +28,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: targeting-service
-          image: 123456789012.dkr.ecr.us-east-1.amazonaws.com/targeting-service:v1
+          image: 712819938659.dkr.ecr.us-east-1.amazonaws.com/targeting-service:4b26da2
           imagePullPolicy: IfNotPresent
           ports:
             - name: http

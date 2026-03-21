@@ -280,6 +280,10 @@ jobs:
           echo "Manifesto atualizado:"
           cat "${FILE}"
 
+      - name: Debug GitOps repo
+        run: |
+          ls -R gitops
+
       - name: Commit and push GitOps changes
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |

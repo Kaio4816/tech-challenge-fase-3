@@ -22,7 +22,7 @@ jobs:
       service_path: flag-service
       language: python
       ecr_repository: flag-service
-      gitops_manifest_path: apps/flag-service/deployment.yaml
+      gitops_manifest_path: gitops/apps/flag-service/deployment.yaml
       fail_on_lint: false
       fail_on_security: false
     secrets: inherit

@@ -22,7 +22,7 @@ jobs:
       service_path: analytics-service
       language: python
       ecr_repository: analytics-service
-      gitops_manifest_path: apps/analytics-service/deployment.yaml
+      gitops_manifest_path: gitops/apps/analytics-service/deployment.yaml
       fail_on_lint: false
       fail_on_security: false
     secrets: inherit

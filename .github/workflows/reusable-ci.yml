@@ -298,4 +298,6 @@ jobs:
           fi
 
           git commit -m "chore(${SERVICE_NAME}): update image to ${SHORT_SHA}"
-          git push
+
+          git pull --rebase origin main
+          git push origin main

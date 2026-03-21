@@ -18,6 +18,10 @@ on:
       gitops_manifest_path:
         required: true
         type: string
+      fail_on_lint:
+        required: false
+        type: boolean
+        default: false
 
 env:
   SERVICE_NAME: ${{ inputs.service_name }}
@@ -40,6 +44,7 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '1.22'
+          cache-dependency-path: ${{ inputs.service_path }}/go.sum
 
       - name: Setup Python
         if: ${{ inputs.language == 'python' }}
@@ -108,6 +113,7 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '1.22'
+          cache-dependency-path: ${{ inputs.service_path }}/go.sum
 
       - name: Setup Python
         if: ${{ inputs.language == 'python' }}
@@ -115,20 +121,10 @@ jobs:
         with:
           python-version: '3.11'
 
-      # Deconmentado para evitar erros de lint em código Go
-      # - name: Run golangci-lint 
-      #   if: ${{ inputs.language == 'go' }}
-      #   uses: golangci/golangci-lint-action@v6
-      #   with:
-      #     version: latest
-      #     working-directory: ${{ inputs.service_path }}
-
-
-      # Comentar para travar o lint
-      - name: Run golangci-lint (non-blocking)
+      - name: Run golangci-lint
         if: ${{ inputs.language == 'go' }}
         uses: golangci/golangci-lint-action@v6
-        continue-on-error: true
+        continue-on-error: ${{ inputs.fail_on_lint == false }}
         with:
           version: latest
           working-directory: ${{ inputs.service_path }}
@@ -142,12 +138,14 @@ jobs:
 
       - name: Run flake8
         if: ${{ inputs.language == 'python' }}
+        continue-on-error: ${{ inputs.fail_on_lint == false }}
         run: |
           cd "${SERVICE_PATH}"
           flake8 .
 
       - name: Run pylint
         if: ${{ inputs.language == 'python' }}
+        continue-on-error: ${{ inputs.fail_on_lint == false }}
         run: |
           cd "${SERVICE_PATH}"
           find . -name "*.py" -not -path "./venv/*" -not -path "./.venv/*" | xargs -r pylint
@@ -166,6 +164,7 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '1.22'
+          cache-dependency-path: ${{ inputs.service_path }}/go.sum
 
       - name: Setup Python
         if: ${{ inputs.language == 'python' }}

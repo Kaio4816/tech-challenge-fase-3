@@ -12,6 +12,6 @@ spec:
     app.kubernetes.io/name: evaluation-service
   ports:
     - name: http
-      port: 80
+      port: 8004
       targetPort: http
       protocol: TCP

@@ -82,6 +82,7 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+.cache/
 
 #####################################
 # NODE (caso use no futuro)

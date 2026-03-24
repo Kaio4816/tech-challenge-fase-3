@@ -14,6 +14,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// teste pipe
+
 // Contexto global para o Redis
 var ctx = context.Background()
 

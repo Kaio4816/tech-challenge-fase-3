@@ -16,6 +16,8 @@ log = logging.getLogger(__name__)
 # Carrega .env para desenvolvimento local
 load_dotenv() 
 
+# teste pipe
+
 app = Flask(__name__)
 
 # --- Configuração ---

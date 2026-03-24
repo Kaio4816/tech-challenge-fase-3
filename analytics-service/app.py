@@ -17,6 +17,8 @@ log = logging.getLogger(__name__)
 # Carrega .env para desenvolvimento local
 load_dotenv()
 
+# teste pipe
+
 # --- Configuração ---
 AWS_REGION = os.getenv("AWS_REGION")
 SQS_QUEUE_URL = os.getenv("AWS_SQS_URL")

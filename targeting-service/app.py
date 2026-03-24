@@ -14,6 +14,8 @@ import logging
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
+# teste pipe
+
 # Carrega .env para desenvolvimento local
 load_dotenv() 
 

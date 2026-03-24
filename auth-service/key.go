@@ -22,3 +22,6 @@ func hashAPIKey(key string) string {
 	// Retorna o hash como uma string hexadecimal de 64 caracteres
 	return hex.EncodeToString(hash[:])
 }
+
+
+// teste pipe

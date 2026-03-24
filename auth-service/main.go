@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 
+	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/joho/godotenv"
 )
 
@@ -22,7 +23,7 @@ func main() {
 	// --- Configuração ---
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8001" // Porta padrão
+		port = "8001"
 	}
 
 	databaseURL := os.Getenv("DATABASE_URL")
@@ -50,12 +51,7 @@ func main() {
 	// --- Rotas da API ---
 	mux := http.NewServeMux()
 	mux.HandleFunc("/health", app.healthHandler)
-
-	// Endpoint público para validar uma chave
 	mux.HandleFunc("/validate", app.validateKeyHandler)
-
-	// Endpoints de "admin" para criar/gerenciar chaves
-	// Eles são protegidos pelo middleware de autenticação
 	mux.Handle("/admin/keys", app.masterKeyAuthMiddleware(http.HandlerFunc(app.createKeyHandler)))
 
 	log.Printf("Serviço de Autenticação (Go) rodando na porta %s", port)

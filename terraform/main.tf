@@ -36,6 +36,7 @@ module "rds" {
   db_password       = var.db_password
   db_instance_class = var.db_instance_class
   db_engine_version = var.db_engine_version
+  vpc_cidr          = var.vpc_cidr
 }
 
 module "elasticache" {

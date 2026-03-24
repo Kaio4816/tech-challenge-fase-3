@@ -30,3 +30,7 @@ variable "db_engine_version" {
   type    = string
   default = "16.13"
 }
+
+variable "vpc_cidr" {
+  type = string
+}

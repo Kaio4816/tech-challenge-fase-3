@@ -10,3 +10,5 @@ argocd_namespace     = "argocd"
 argocd_chart_version = "7.8.2"
 argocd_service_type  = "LoadBalancer"
 argocd_hostname      = ""
+
+vpc_cidr = "10.0.0.0/16"

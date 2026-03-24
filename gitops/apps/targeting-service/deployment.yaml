@@ -55,13 +55,6 @@ spec:
             limits:
               cpu: "300m"
               memory: "256Mi"
-          securityContext:
-            runAsNonRoot: true
-            allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
-            capabilities:
-              drop:
-                - ALL
           readinessProbe:
             httpGet:
               path: /health

@@ -75,4 +75,3 @@ func connectDB(databaseURL string) (*sql.DB, error) {
 	return db, nil
 }
 
-// teste

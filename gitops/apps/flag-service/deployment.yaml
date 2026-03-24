@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: flag-service
-          image: 712819938659.dkr.ecr.us-east-1.amazonaws.com/flag-service:37e7429
+          image: 712819938659.dkr.ecr.us-east-1.amazonaws.com/flag-service:74d587e
           imagePullPolicy: Always
           ports:
             - name: http

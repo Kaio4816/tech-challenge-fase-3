@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: evaluation-service
-          image: 712819938659.dkr.ecr.us-east-1.amazonaws.com/evaluation-service:37e7429
+          image: 712819938659.dkr.ecr.us-east-1.amazonaws.com/evaluation-service:9152d2c
           imagePullPolicy: IfNotPresent
           ports:
             - name: http

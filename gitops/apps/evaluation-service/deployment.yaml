@@ -25,7 +25,6 @@ spec:
         app.kubernetes.io/component: backend
         app.kubernetes.io/part-of: techchallenge
     spec:
-      serviceAccountName: evaluation-service
       containers:
         - name: evaluation-service
           image: 712819938659.dkr.ecr.us-east-1.amazonaws.com/evaluation-service:37e7429
@@ -45,9 +44,9 @@ spec:
                   name: evaluation-service-secret
                   key: REDIS_URL
             - name: FLAG_SERVICE_URL
-              value: "http://flag-service.techchallenge.svc.cluster.local"
+              value: "http://flag-service.techchallenge.svc.cluster.local:8002"
             - name: TARGETING_SERVICE_URL
-              value: "http://targeting-service.techchallenge.svc.cluster.local"
+              value: "http://targeting-service.techchallenge.svc.cluster.local:8003"
             - name: SERVICE_API_KEY
               valueFrom:
                 secretKeyRef:

@@ -128,3 +128,8 @@ variable "argocd_hostname" {
   type        = string
   default     = "tech-challenger"
 }
+
+variable "db_engine_version" {
+  type    = string
+  default = "16.13"
+}

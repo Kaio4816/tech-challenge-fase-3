@@ -25,3 +25,8 @@ variable "db_password" {
 variable "db_instance_class" {
   type = string
 }
+
+variable "db_engine_version" {
+  type    = string
+  default = "16.13"
+}

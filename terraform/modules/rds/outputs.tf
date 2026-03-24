@@ -1,3 +1,13 @@
 output "rds_endpoints" {
-  value = aws_db_instance.postgres[*].address
+  value = {
+    for service, db in aws_db_instance.postgres :
+    service => db.address
+  }
+}
+
+output "rds_identifiers" {
+  value = {
+    for service, db in aws_db_instance.postgres :
+    service => db.identifier
+  }
 }
